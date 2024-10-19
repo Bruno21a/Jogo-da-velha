@@ -1,0 +1,113 @@
+using System;
+
+namespace Ex
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            char[,] tabuleiro = new char[3, 3];
+            int jogadas = 0;
+            bool venceu = false;
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    tabuleiro[i, j] = '-';//auto preenchimento 
+                }
+            }
+            while (!venceu && jogadas < 9)
+            {
+                Console.WriteLine("Jogador 1 faça sua jogada.");
+                Console.Write("Digite a linha: ");
+                int linha1 = int.Parse(Console.ReadLine());
+                Console.Write("Digite a coluna: ");
+                int coluna1 = int.Parse(Console.ReadLine());
+                if (tabuleiro[linha1, coluna1] == '-')
+                {
+                    tabuleiro[linha1, coluna1] = 'X';
+                    jogadas++;
+                }
+                else
+                {
+                    Console.WriteLine("Posição ocupada, tente novamente.");
+                    continue;
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        Console.Write(tabuleiro[i, j] + " ");
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+                for (int i = 0; i < 3; i++)
+                {
+                    if ((tabuleiro[i, 0] == 'X' && tabuleiro[i, 1] == 'X' && tabuleiro[i, 2] == 'X') || (tabuleiro[0, i] == 'X' && tabuleiro[1, i] == 'X' && tabuleiro[2, i] == 'X'))
+                    {
+                        venceu = true;
+                    }
+                }
+                if ((tabuleiro[0, 0] == 'X' && tabuleiro[1, 1] == 'X' && tabuleiro[2, 2] == 'X') || (tabuleiro[0, 2] == 'X' && tabuleiro[1, 1] == 'X' && tabuleiro[2, 0] == 'X'))
+                {
+                    venceu = true;
+                }
+                if (venceu)
+                {
+                    Console.WriteLine("Jogador 1 venceu!");
+                    break;
+                }
+                if (jogadas == 9)
+                {
+                    break;
+                }
+                Console.WriteLine("Jogador 2 faça sua jogada.");
+                Console.Write("Digite a linha: ");
+                int linha2 = int.Parse(Console.ReadLine());
+                Console.Write("Digite a coluna: ");
+                int coluna2 = int.Parse(Console.ReadLine());
+                if (tabuleiro[linha2, coluna2] == '-')
+                {
+                    tabuleiro[linha2, coluna2] = 'O';
+                    jogadas++;
+                }
+                else
+                {
+                    Console.WriteLine("Posição ocupada, tente novamente.");
+                    continue;
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        Console.Write(tabuleiro[i, j] + " ");
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+                for (int i = 0; i < 3; i++)
+                {
+                    if ((tabuleiro[i, 0] == 'O' && tabuleiro[i, 1] == 'O' && tabuleiro[i, 2] == 'O') || (tabuleiro[0, i] == 'O' && tabuleiro[1, i] == 'O' && tabuleiro[2, i] == 'O'))
+                    {
+                        venceu = true;
+                    }
+                }
+                if ((tabuleiro[0, 0] == 'O' && tabuleiro[1, 1] == 'O' && tabuleiro[2, 2] == 'O') || (tabuleiro[0, 2] == 'O' && tabuleiro[1, 1] == 'O' && tabuleiro[2, 0] == 'O'))
+                {
+                    venceu = true;
+                }
+                if (venceu)
+                {
+                    Console.WriteLine("Jogador 2 venceu!");
+                    break;
+                }
+            }
+            if (!venceu && jogadas == 9)
+            {
+                Console.WriteLine("Empate!");
+            }
+            Console.ReadLine();
+        }
+    }
+}
